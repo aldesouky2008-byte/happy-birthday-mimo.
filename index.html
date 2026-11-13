@@ -1,243 +1,503 @@
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مستحيل انساه يوم عيد ميلادك كل سنه وانتي طيبه ي ميمو ♥️</title>
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Fonts: Cairo, Tajawal & Aref Ruqaa -->
+    <title>عيد ميلاد سعيد يا ميمو 🎂💖</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- Canvas Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-velvet: #0b0b0f;
-            --bg-obsidian: #121218;
-            --charcoal-surface: #1f2028;
-            --slate-elevated: #2d2e3a;
-            --silver-muted: #9ca3af;
-            --pink-primary: #ff6b9d;
-            --pink-soft: #f48fb1;
-            --pink-blush: #ffb6c1;
+            --bg-dark: #0a0a0c;
+            --card-bg: rgba(24, 24, 28, 0.88);
+            --gray-surface: #1e1e24;
+            --gray-border: rgba(255, 255, 255, 0.12);
+            --pink-primary: #ff2e7e;
+            --pink-glow: #ff69b4;
+            --pink-soft: #ffb3d1;
+            --text-main: #f4f4f6;
+            --text-muted: #a1a1aa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Cairo', 'Tajawal', sans-serif;
-            background: radial-gradient(circle at top right, #1f1722 0%, var(--bg-obsidian) 45%, var(--bg-velvet) 100%);
-            color: #f3f4f6;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(255, 46, 126, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(161, 161, 170, 0.12) 0%, transparent 45%),
+                linear-gradient(145deg, #09090b 0%, #141418 50%, #0d0d10 100%);
+            color: var(--text-main);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 14px;
             overflow-x: hidden;
+            position: relative;
         }
 
-        .artistic-font {
-            font-family: 'Aref Ruqaa', serif;
+        /* شاشة البداية التفاعلية */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 12, 0.96);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        /* Ultra-Luxurious Dark Obsidian & Charcoal Glassmorphism with Pink Metallic Rim */
-        .luxury-glass {
-            background: linear-gradient(145deg, rgba(31, 32, 40, 0.85) 0%, rgba(18, 18, 24, 0.92) 100%);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 107, 157, 0.28);
-            box-shadow: 0 25px 65px -12px rgba(0, 0, 0, 0.85),
-                        0 0 30px -10px rgba(255, 107, 157, 0.16),
-                        0 1px 0 0 rgba(255, 182, 193, 0.18) inset;
+        #intro-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(1.05);
         }
 
-        .luxury-pill {
-            background: linear-gradient(90deg, rgba(31, 32, 40, 0.94) 0%, rgba(45, 46, 58, 0.94) 100%);
+        .gift-box {
+            font-size: 72px;
+            margin-bottom: 18px;
+            animation: floatGift 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 25px rgba(255, 46, 126, 0.5));
+        }
+
+        @keyframes floatGift {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(4deg); }
+        }
+
+        .intro-title {
+            font-size: 1.65rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff 0%, var(--pink-soft) 50%, var(--pink-primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .intro-sub {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin-bottom: 28px;
+            max-width: 320px;
+            line-height: 1.6;
+        }
+
+        #runaway-btn {
+            background: linear-gradient(135deg, var(--pink-primary), #d91b65);
+            color: #fff;
+            border: 1px solid rgba(255, 179, 209, 0.4);
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 46, 126, 0.45);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+            position: relative;
+        }
+
+        #runaway-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* البطاقة الرئيسية الفاخرة */
+        .main-card {
+            width: 100%;
+            max-width: 460px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 105, 180, 0.28);
+            border-radius: 28px;
+            padding: 28px 22px;
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.75),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 107, 157, 0.35);
-            box-shadow: 0 18px 45px -8px rgba(0, 0, 0, 0.8),
-                        0 0 20px -6px rgba(255, 107, 157, 0.25);
+            position: relative;
+            z-index: 10;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        /* Ambient Glowing Light Orbs */
-        .orb {
+        .main-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 46, 126, 0.14);
+            border: 1px solid rgba(255, 46, 126, 0.35);
+            color: var(--pink-soft);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 5px 14px;
+            border-radius: 50px;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .header-title {
+            font-size: 1.85rem;
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 6px;
+            background: linear-gradient(to left, #ffffff, #e4e4e7, var(--pink-soft));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* مشغل الصوت الفاخر */
+        .audio-box {
+            background: linear-gradient(145deg, #18181d, #222229);
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            border-radius: 20px;
+            padding: 14px 16px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .audio-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .audio-label {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--pink-soft);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .play-toggle-btn {
+            background: var(--pink-primary);
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 46, 126, 0.4);
+        }
+
+        audio {
+            width: 100%;
+            height: 38px;
+            border-radius: 10px;
+            outline: none;
+            filter: invert(0.9) hue-rotate(305deg) saturate(1.4);
+        }
+
+        /* نص الرسالة */
+        .message-box {
+            background: rgba(18, 18, 22, 0.75);
+            border-right: 3px solid var(--pink-primary);
+            border-top: 1px solid var(--gray-border);
+            border-left: 1px solid var(--gray-border);
+            border-bottom: 1px solid var(--gray-border);
+            border-radius: 18px;
+            padding: 20px 18px;
+            line-height: 1.95;
+            font-size: 1.02rem;
+            color: #e4e4e7;
+            margin-bottom: 22px;
+            text-align: right;
+        }
+
+        .message-box p {
+            margin-bottom: 12px;
+        }
+
+        .message-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            color: var(--pink-soft);
+            font-weight: 700;
+        }
+
+        /* قسم الزرار التفاعلي السفلي */
+        .interactive-section {
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        #celebrateBtn {
+            width: 100%;
+            background: linear-gradient(135deg, #27272f 0%, #1c1c22 100%);
+            color: var(--pink-soft);
+            border: 1px solid rgba(255, 46, 126, 0.45);
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+            transition: all 0.25s ease;
+        }
+
+        #celebrateBtn:hover, #celebrateBtn:active {
+            background: linear-gradient(135deg, var(--pink-primary), #c9185c);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 46, 126, 0.4);
+        }
+
+        #funNoteDisplay {
+            margin-top: 14px;
+            min-height: 54px;
+            background: rgba(255, 46, 126, 0.08);
+            border: 1px dashed rgba(255, 105, 180, 0.35);
+            border-radius: 14px;
+            padding: 12px 16px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: popIn 0.35s ease;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.92); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* التوقيع */
+        .footer-sign {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-sign span {
+            color: var(--pink-soft);
+            font-weight: 700;
+        }
+
+        /* المؤثرات المتساقطة */
+        .confetti {
             position: fixed;
-            border-radius: 50%;
-            filter: blur(85px);
-            z-index: 0;
+            top: -20px;
+            z-index: 999;
             pointer-events: none;
-            animation: drift 16s ease-in-out infinite alternate;
-        }
-
-        @keyframes drift {
-            0% { transform: translate(0px, 0px) scale(1); }
-            100% { transform: translate(28px, -32px) scale(1.1); }
-        }
-
-        /* Gentle Floating Pink & Silver Petals */
-        .petal {
-            position: fixed;
-            top: -30px;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.75;
             animation: fall linear forwards;
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg) translateX(0px);
-                opacity: 0;
-            }
-            15% {
-                opacity: 0.8;
-            }
-            85% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(108vh) rotate(360deg) translateX(35px);
-                opacity: 0;
-            }
-        }
-
-        /* Smooth Fade Up Entrance */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
             to {
-                opacity: 1;
-                transform: translateY(0);
+                transform: translateY(105vh) rotate(720deg);
             }
-        }
-
-        .animate-fade-up {
-            animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
-        /* Note Pop Animation */
-        @keyframes notePop {
-            0% {
-                opacity: 0;
-                transform: scale(0.95) translateY(8px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .note-pop {
-            animation: notePop 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
-        /* Equalizer Animation */
-        .eq-bar {
-            width: 3px;
-            height: 6px;
-            border-radius: 999px;
-            background: linear-gradient(to top, #ff6b9d, #ffb6c1);
-            transition: height 0.2s ease;
-        }
-
-        .is-playing .eq-bar:nth-child(1) { animation: pulseBar 0.7s ease-in-out infinite; }
-        .is-playing .eq-bar:nth-child(2) { animation: pulseBar 0.5s ease-in-out infinite 0.15s; }
-        .is-playing .eq-bar:nth-child(3) { animation: pulseBar 0.8s ease-in-out infinite 0.3s; }
-        .is-playing .eq-bar:nth-child(4) { animation: pulseBar 0.6s ease-in-out infinite 0.1s; }
-
-        @keyframes pulseBar {
-            0%, 100% { height: 5px; }
-            50% { height: 18px; }
-        }
-
-        /* Glowing Pink Metallic Halo for Gift Button */
-        @keyframes softHalo {
-            0%, 100% {
-                box-shadow: 0 10px 28px -5px rgba(255, 107, 157, 0.55), 0 0 0 0 rgba(255, 107, 157, 0.45);
-            }
-            50% {
-                box-shadow: 0 14px 35px -5px rgba(255, 107, 157, 0.7), 0 0 0 14px rgba(255, 107, 157, 0);
-            }
-        }
-
-        .halo-btn {
-            animation: softHalo 2.4s infinite;
-        }
-
-        /* Sleek Custom Dark Pink HTML5 Audio Styling */
-        audio {
-            filter: invert(92%) hue-rotate(295deg) saturate(160%) contrast(95%);
-            border-radius: 9999px;
-            height: 42px;
         }
     </style>
 </head>
-<body class="relative pb-28 selection:bg-[#ff6b9d]/30 selection:text-[#ffb6c1]">
+<body>
 
-    <!-- Ambient Velvet Black, Slate & Pink Light Orbs -->
-    <div class="orb w-80 h-80 bg-[#ff6b9d]/20 top-[-4rem] right-[-4rem]"></div>
-    <div class="orb w-96 h-96 bg-[#2d2e3a]/60 bottom-10 left-[-5rem]" style="animation-delay: -5s;"></div>
-    <div class="orb w-72 h-72 bg-[#f48fb1]/15 top-1/2 left-1/3" style="animation-delay: -9s;"></div>
+    <!-- شاشة البداية التفاعلية -->
+    <div id="intro-screen">
+        <div class="gift-box">🎁</div>
+        <h2 class="intro-title">في مفاجأة مخصوصة ليكي يا ميمو ✨</h2>
+        <p class="intro-sub">علي صوت الموبايل الأول، وحاولي تمسكي الزرار عشان تفتحي هديتك 👇</p>
+        <button id="runaway-btn">افتحي الهدية 💖</button>
+    </div>
 
-    <!-- Sleek Welcome Gate Overlay (Black & Charcoal Glass + Pink Glow) -->
-    <div id="welcomeOverlay" class="fixed inset-0 z-50 flex items-center justify-center p-5 bg-[#0b0b0f]/85 backdrop-blur-xl transition-opacity duration-500">
-        <div class="luxury-glass max-w-sm w-full rounded-[2rem] p-8 text-center relative overflow-hidden min-h-[360px] flex flex-col justify-between items-center">
-            <!-- Subtle Top Metallic Pink Accent Line -->
-            <div class="absolute top-0 inset-x-10 h-[2px] bg-gradient-to-r from-transparent via-[#ff6b9d] to-transparent opacity-80"></div>
+    <!-- البطاقة الرئيسية -->
+    <div class="main-card" id="mainCard">
+        <span class="badge">✨ HAPPY BIRTHDAY MIMO ✨</span>
+        <h1 class="header-title">كل سنة وانتي طيبة يا مييمو 🎂💖</h1>
+        <div class="sub-date">
+            <span>🖤</span>
+            <span>يوم مميز لأجدع أخت وصاحبة في الدنيا</span>
+        </div>
 
-            <div class="w-full">
-                <div id="giftEmoji" class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-tr from-[#ff6b9d] to-[#f48fb1] flex items-center justify-center text-3xl shadow-lg shadow-[#ff6b9d]/30 border border-[#ffb6c1]/40 transition-transform duration-300">
-                    🎁
+        <!-- مشغل الأغنية -->
+        <div class="audio-box">
+            <div class="audio-header">
+                <div class="audio-label">
+                    <span>🎵</span>
+                    <span>أغنية مخصوص ليكي في يومك 💖</span>
                 </div>
-
-                <h2 class="artistic-font text-3xl text-[#ffb6c1] mb-2 drop-shadow-sm">
-                    هدية لـ ميمو
-                </h2>
-
-                <p id="teaseMessage" class="text-sm sm:text-base text-gray-200 leading-relaxed font-bold min-h-[3.2rem] flex items-center justify-center px-2 transition-all">
-                    كل سنة وانتي طيبة وبخير.. لمسة بسيطة عشان نبدأ يومك المميز ✨
-                </p>
-
-                <!-- 3-Tap Progress Counter Badge -->
-                <div id="tapCounterBadge" class="hidden mt-2 inline-flex items-center gap-2 px-4 py-1 rounded-full bg-[#2d2e3a] border border-[#ff6b9d]/50 text-[#ffb6c1] text-xs sm:text-sm font-extrabold shadow-inner">
-                    <span>العداد:</span>
-                    <span id="tapCounterText">0 / 3</span>
-                </div>
+                <button class="play-toggle-btn" id="manualPlayBtn">⏸ إيقاف / تشغيل</button>
             </div>
+            <audio id="bdayAudio" controls loop preload="auto">
+                <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_946b80d8f2.mp3?filename=happy-birthday-to-you-piano-version-13976.mp3" type="audio/mpeg">
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            </audio>
+        </div>
 
-            <!-- Interactive Play Area inside Card -->
-            <div id="buttonArena" class="relative w-full h-32 mt-3 flex items-center justify-center">
-                <button id="openGiftBtn" type="button" class="halo-btn py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#ff6b9d] via-[#f48fb1] to-[#ff6b9d] text-[#0b0b0f] font-black text-base sm:text-lg tracking-wide hover:brightness-105 active:scale-95 transition-all duration-200 cursor-pointer whitespace-nowrap border border-[#ffb6c1]/60">
-                    اضغطي لفتح الهدية 🎁
-                </button>
-            </div>
+        <!-- رسالة عيد الميلاد -->
+        <div class="message-box">
+            <p>
+                النهاردة مش يوم عادي، النهاردة عيد ميلاد <span class="highlight">أقرب وأجدع أخت وصاحبة</span> ليا في الدنيا كلها ♥️
+            </p>
+            <p>
+                حبيت أعملك حاجة مختلفة وتفضل ذكرى حلوة بينا، مهندس بقا ولزم تبقا رساله عيد ميلادك متعوب عليها جدا 😎✨
+            </p>
+            <p>
+                يارب السنة الجديدة تبقى كلها خير وسعادة ونجاح عليكي، وتحققي كل اللي بتتمنيه وزيادة، ودايماً منورة حياتنا بضحكتك وهزارنا ومواقفنا اللي مبتخلصش 🎂🥂
+            </p>
+        </div>
+
+        <!-- الزرار التفاعلي السفلي -->
+        <div class="interactive-section">
+            <button id="celebrateBtn">دوسي هنا ها يطلع كلام تحت 👇😂</button>
+            <div id="funNoteDisplay"></div>
+        </div>
+
+        <!-- التوقيع -->
+        <div class="footer-sign">
+            تم تصميم بواسطه <span>محمد دسوقي</span> 🖤✨
         </div>
     </div>
 
-    <!-- Main Page Content -->
-    <div class="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 flex flex-col items-center">
+    <script>
+        const introScreen = document.getElementById('intro-screen');
+        const runawayBtn = document.getElementById('runaway-btn');
+        const mainCard = document.getElementById('mainCard');
+        const bdayAudio = document.getElementById('bdayAudio');
+        const manualPlayBtn = document.getElementById('manualPlayBtn');
+        const celebrateBtn = document.getElementById('celebrateBtn');
+        const funNoteDisplay = document.getElementById('funNoteDisplay');
 
-        <!-- 1. Top Hero / Header -->
-        <header class="w-full text-center mb-8 animate-fade-up">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1f2028]/90 border border-[#ff6b9d]/40 text-[#ffb6c1] text-xs sm:text-sm font-bold shadow-md mb-4">
-                <span>✨</span>
-                <span>عيد ميلاد سعيد يا ميمو • يوم استثنائي</span>
-                <span>✨</span>
-            </div>
+        let escapeCount = 0;
+        let clickStage = 0;
 
-            <h1 class="text-xl sm:text-2xl md:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-l from-[#ffb6c1] via-[#ff6b9d] to-[#f48fb1] leading-relaxed px-2 drop-shadow-sm">
-                مستحيل انساه يوم عيد ميلادك كل سنه وانتي طيبه ي ميمو ♥️
-            </h1>
+        // دالة تشغيل الصوت بأمان
+        function startMusic() {
+            bdayAudio.volume = 1.0;
+            const playPromise = bdayAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    manualPlayBtn.textContent = "⏸ إيقاف مؤقت";
+                }).catch(() => {
+                    manualPlayBtn.textContent = "▶️ شغّلي الأغنية";
+                });
+            }
+        }
 
-            <!-- Delicate Pink & Silver Metallic Divider -->
-            <div class="flex items-center justify-center gap-3 mt-5 opacity-85">
-                <span class="h-[1px] w-16 sm:w-24 bg-gradient-to-r from-transparent via-[#9ca3af]/50 to-[#ff6b9d]"></span>
-                <span class="text-[#ff6b9d] text-sm">✦</span>
-                <span class="h-[1px] w-16 sm:w-24 bg-gradient-to-l from-transparent via-[#9ca3af]/50 to-[#ff6b9d]"></span>
+        // زرار التشغيل اليدوي الإضافي
+        manualPlayBtn.addEventListener('click', () => {
+            if (bdayAudio.paused) {
+                bdayAudio.play();
+                manualPlayBtn.textContent = "⏸ إيقاف مؤقت";
+            } else {
+                bdayAudio.pause();
+                manualPlayBtn.textContent = "▶️ تشغيل الأغنية";
+            }
+        });
+
+        // تفاعل شاشة البداية (هروب مرتين ثم عداد 3 ضغطات)
+        runawayBtn.addEventListener('click', () => {
+            // محاولة تشغيل الصوت مع كل ضغطة لضمان تفعيله من المتصفح
+            if (escapeCount >= 2) {
+                startMusic();
+            }
+
+            if (escapeCount < 2) {
+                escapeCount++;
+                const randomX = (Math.random() - 0.5) * 160;
+                const randomY = (Math.random() - 0.5) * 200;
+                runawayBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                runawayBtn.textContent = escapeCount === 1 ? "رايحة فين امسكيني 😂" : "آخر مرة خلاص تعالي 😜";
+                return;
+            }
+
+            runawayBtn.style.transform = "translate(0, 0)";
+            clickStage++;
+
+            if (clickStage === 1) {
+                runawayBtn.textContent = "دوسي كمان مرتين (2) 💖";
+            } else if (clickStage === 2) {
+                runawayBtn.textContent = "باقي ضغطة واحدة (1) 🔥";
+            } else {
+                startMusic();
+                introScreen.classList.add('hidden');
+                setTimeout(() => {
+                    introScreen.style.display = 'none';
+                    mainCard.classList.add('visible');
+                    launchConfetti();
+                }, 500);
+            }
+        });
+
+        // قائمة الجمل للزرار السفلي
+        const funNotes = [
+            "نفسي اكل باشميل تبقي عامله انتي 😫😂",
+            "أحلى ميمو في الدنيا كلها وكل سنة وانتي منورة حياتنا 💖",
+            "ربنا يستر من مصايب السنة الجديدة اللي هنعملها سوا 😂🔥",
+            "أجدع أخت وصاحبة في المجرة ومليش غيرك بجد ♥️✨",
+            "عقبال 100 سنة وانتي ناجحة ومحققة كل اللي نفسك فيه 🎂🎉",
+            "متنسيش تردي على الرسالة عشان تعبت في الحوار ده 😎✨"
+        ];
+
+        let noteIndex = 0;
+
+        celebrateBtn.addEventListener('click', () => {
+            if (bdayAudio.paused) {
+                startMusic();
+            }
+            funNoteDisplay.style.display = 'flex';
+            funNoteDisplay.style.animation = 'none';
+            funNoteDisplay.offsetHeight; // إعادة تشغيل الأنيميشن
+            funNoteDisplay.style.animation = 'popIn 0.35s ease';
+            funNoteDisplay.textContent = funNotes[noteIndex];
+            
+            noteIndex = (noteIndex + 1) % funNotes.length;
+            launchConfetti();
+        });
+
+        // مؤثرات القصاصات الملونة
+        function launchConfetti() {
+            const symbols = ['💖', '🎂', '✨', '🖤', '🌸', '🎉'];
+            for (let i = 0; i < 28; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.fontSize = (Math.random() * 14 + 14) + 'px';
+                conf.style.animationDuration = (Math.random() * 2 + 2.2) + 's';
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 4500);
+            }
+        }
+    </script>
+</body>
+</html>
+nt-to-l from-transparent via-[#9ca3af]/50 to-[#ff6b9d]"></span>
             </div>
         </header>
 
