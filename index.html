@@ -10,8 +10,8 @@
     <style>
         :root {
             --bg-dark: #0a0a0c;
-            --card-bg: rgba(24, 24, 28, 0.88);
-            --gray-surface: #1e1e24;
+            --card-bg: rgba(22, 22, 26, 0.92);
+            --gray-surface: #1d1d22;
             --gray-border: rgba(255, 255, 255, 0.12);
             --pink-primary: #ff2e7e;
             --pink-glow: #ff69b4;
@@ -42,14 +42,13 @@
             justify-content: center;
             padding: 20px 14px;
             overflow-x: hidden;
-            position: relative;
         }
 
         /* شاشة البداية التفاعلية */
         #intro-screen {
             position: fixed;
             inset: 0;
-            background: rgba(10, 10, 12, 0.96);
+            background: rgba(10, 10, 12, 0.97);
             backdrop-filter: blur(16px);
             z-index: 1000;
             display: flex;
@@ -58,13 +57,13 @@
             justify-content: center;
             padding: 24px;
             text-align: center;
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         #intro-screen.hidden {
             opacity: 0;
             pointer-events: none;
-            transform: scale(1.05);
+            transform: scale(1.04);
         }
 
         .gift-box {
@@ -106,34 +105,30 @@
             border-radius: 50px;
             cursor: pointer;
             box-shadow: 0 8px 25px rgba(255, 46, 126, 0.45);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
-            position: relative;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        #runaway-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* البطاقة الرئيسية الفاخرة */
+        /* البطاقة الرئيسية */
         .main-card {
             width: 100%;
             max-width: 460px;
             background: var(--card-bg);
-            border: 1px solid rgba(255, 105, 180, 0.28);
+            border: 1px solid rgba(255, 105, 180, 0.3);
             border-radius: 28px;
             padding: 28px 22px;
             box-shadow: 
-                0 25px 60px rgba(0, 0, 0, 0.75),
+                0 25px 60px rgba(0, 0, 0, 0.8),
                 inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
             position: relative;
             z-index: 10;
+            display: none;
             opacity: 0;
-            transform: translateY(25px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
 
         .main-card.visible {
+            display: block;
             opacity: 1;
             transform: translateY(0);
         }
@@ -148,7 +143,6 @@
             padding: 5px 14px;
             border-radius: 50px;
             margin-bottom: 14px;
-            letter-spacing: 0.5px;
         }
 
         .header-title {
@@ -170,25 +164,21 @@
             gap: 6px;
         }
 
-        /* مشغل الصوت الفاخر */
+        /* شريط الموسيقى */
         .audio-box {
             background: linear-gradient(145deg, #18181d, #222229);
             border: 1px solid rgba(255, 105, 180, 0.3);
-            border-radius: 20px;
+            border-radius: 18px;
             padding: 14px 16px;
             margin-bottom: 22px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-        }
-
-        .audio-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 10px;
+            gap: 10px;
         }
 
         .audio-label {
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-weight: 700;
             color: var(--pink-soft);
             display: flex;
@@ -196,29 +186,22 @@
             gap: 8px;
         }
 
-        .play-toggle-btn {
-            background: var(--pink-primary);
-            color: white;
+        .music-btn {
+            background: linear-gradient(135deg, var(--pink-primary), #c9185c);
+            color: #fff;
             border: none;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
             font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(255, 46, 126, 0.4);
-        }
-
-        audio {
-            width: 100%;
-            height: 38px;
-            border-radius: 10px;
-            outline: none;
-            filter: invert(0.9) hue-rotate(305deg) saturate(1.4);
+            white-space: nowrap;
+            box-shadow: 0 4px 14px rgba(255, 46, 126, 0.4);
         }
 
         /* نص الرسالة */
         .message-box {
-            background: rgba(18, 18, 22, 0.75);
+            background: rgba(16, 16, 20, 0.8);
             border-right: 3px solid var(--pink-primary);
             border-top: 1px solid var(--gray-border);
             border-left: 1px solid var(--gray-border);
@@ -245,10 +228,9 @@
             font-weight: 700;
         }
 
-        /* قسم الزرار التفاعلي السفلي */
+        /* الزرار السفلي */
         .interactive-section {
             text-align: center;
-            margin-top: 8px;
         }
 
         #celebrateBtn {
@@ -265,11 +247,10 @@
             transition: all 0.25s ease;
         }
 
-        #celebrateBtn:hover, #celebrateBtn:active {
+        #celebrateBtn:active {
             background: linear-gradient(135deg, var(--pink-primary), #c9185c);
             color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 46, 126, 0.4);
+            transform: scale(0.98);
         }
 
         #funNoteDisplay {
@@ -286,12 +267,6 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            animation: popIn 0.35s ease;
-        }
-
-        @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.92); }
-            100% { opacity: 1; transform: scale(1); }
         }
 
         /* التوقيع */
@@ -309,7 +284,6 @@
             font-weight: 700;
         }
 
-        /* المؤثرات المتساقطة */
         .confetti {
             position: fixed;
             top: -20px;
@@ -319,15 +293,202 @@
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(105vh) rotate(720deg);
-            }
+            to { transform: translateY(105vh) rotate(720deg); }
         }
     </style>
 </head>
 <body>
 
-    <!-- شاشة البداية التفاعلية -->
+    <!-- شاشة البداية -->
+    <div id="intro-screen">
+        <div class="gift-box">🎁</div>
+        <h2 class="intro-title">في مفاجأة مخصوصة ليكي يا ميمو ✨</h2>
+        <p class="intro-sub">علي صوت الموبايل الأول، وحاولي تمسكي الزرار عشان تفتحي هديتك 👇</p>
+        <button id="runaway-btn">افتحي الهدية 💖</button>
+    </div>
+
+    <!-- البطاقة الرئيسية -->
+    <div class="main-card" id="mainCard">
+        <span class="badge">✨ HAPPY BIRTHDAY MIMO ✨</span>
+        <h1 class="header-title">كل سنة وانتي طيبة يا مييمو 🎂💖</h1>
+        <div class="sub-date">
+            <span>🖤</span>
+            <span>يوم مميز لأجدع أخت وصاحبة في الدنيا</span>
+        </div>
+
+        <!-- مشغل موسيقى عيد الميلاد المدمج -->
+        <div class="audio-box">
+            <div class="audio-label">
+                <span>🎵</span>
+                <span>أغنية مخصوص ليكي في يومك 💖</span>
+            </div>
+            <button class="music-btn" id="musicBtn">⏸ إيقاف</button>
+        </div>
+
+        <!-- رسالة التهنئة -->
+        <div class="message-box">
+            <p>
+                النهاردة مش يوم عادي، النهاردة عيد ميلاد <span class="highlight">أقرب وأجدع أخت وصاحبة</span> ليا في الدنيا كلها ♥️
+            </p>
+            <p>
+                حبيت أعملك حاجة مختلفة وتفضل ذكرى حلوة بينا، مهندس بقا ولزم تبقا رساله عيد ميلادك متعوب عليها جدا 😎✨
+            </p>
+            <p>
+                يارب السنة الجديدة تبقى كلها خير وسعادة ونجاح عليكي، وتحققي كل اللي بتتمنيه وزيادة، ودايماً منورة حياتنا بضحكتك وهزارنا ومواقفنا اللي مبتخلصش 🎂🥂
+            </p>
+        </div>
+
+        <!-- الزرار السفلي -->
+        <div class="interactive-section">
+            <button id="celebrateBtn">دوسي هنا ها يطلع كلام تحت 👇😂</button>
+            <div id="funNoteDisplay"></div>
+        </div>
+
+        <!-- التوقيع -->
+        <div class="footer-sign">
+            تم تصميم بواسطه <span>محمد دسوقي</span> 🖤✨
+        </div>
+    </div>
+
+    <script>
+        // مولد موسيقى عيد ميلاد مدمج يعمل فوراً بدون روابط خارجية
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyTimer = null;
+
+        const birthdayNotes = [
+            { f: 261.63, d: 350 }, { f: 261.63, d: 150 }, { f: 293.66, d: 500 }, { f: 261.63, d: 500 }, { f: 349.23, d: 500 }, { f: 329.63, d: 900 },
+            { f: 261.63, d: 350 }, { f: 261.63, d: 150 }, { f: 293.66, d: 500 }, { f: 261.63, d: 500 }, { f: 392.00, d: 500 }, { f: 349.23, d: 900 },
+            { f: 261.63, d: 350 }, { f: 261.63, d: 150 }, { f: 523.25, d: 500 }, { f: 440.00, d: 500 }, { f: 349.23, d: 500 }, { f: 329.63, d: 500 }, { f: 293.66, d: 900 },
+            { f: 466.16, d: 350 }, { f: 466.16, d: 150 }, { f: 440.00, d: 500 }, { f: 349.23, d: 500 }, { f: 392.00, d: 500 }, { f: 349.23, d: 1000 }
+        ];
+
+        function playNote(freq, duration) {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            
+            gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.22, audioCtx.currentTime + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration / 1000);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration / 1000);
+        }
+
+        function startBirthdayMelody() {
+            if (isPlaying) return;
+            isPlaying = true;
+            document.getElementById('musicBtn').textContent = '⏸ إيقاف';
+            let idx = 0;
+
+            function nextNote() {
+                if (!isPlaying) return;
+                const note = birthdayNotes[idx];
+                playNote(note.f, note.d);
+                idx = (idx + 1) % birthdayNotes.length;
+                melodyTimer = setTimeout(nextNote, note.d + 60);
+            }
+            nextNote();
+        }
+
+        function stopBirthdayMelody() {
+            isPlaying = false;
+            clearTimeout(melodyTimer);
+            document.getElementById('musicBtn').textContent = '▶️ تشغيل';
+        }
+
+        document.getElementById('musicBtn').addEventListener('click', () => {
+            if (isPlaying) {
+                stopBirthdayMelody();
+            } else {
+                startBirthdayMelody();
+            }
+        });
+
+        // منطق شاشة البداية
+        const introScreen = document.getElementById('intro-screen');
+        const runawayBtn = document.getElementById('runaway-btn');
+        const mainCard = document.getElementById('mainCard');
+        let escapeCount = 0;
+        let clickStage = 0;
+
+        runawayBtn.addEventListener('click', () => {
+            if (escapeCount < 2) {
+                escapeCount++;
+                const randomX = (Math.random() - 0.5) * 140;
+                const randomY = (Math.random() - 0.5) * 180;
+                runawayBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+                runawayBtn.textContent = escapeCount === 1 ? "رايحة فين امسكيني 😂" : "آخر مرة خلاص تعالي 😜";
+                return;
+            }
+
+            runawayBtn.style.transform = "translate(0, 0)";
+            clickStage++;
+
+            if (clickStage === 1) {
+                runawayBtn.textContent = "دوسي كمان مرتين (2) 💖";
+            } else if (clickStage === 2) {
+                runawayBtn.textContent = "باقي ضغطة واحدة (1) 🔥";
+            } else {
+                startBirthdayMelody();
+                introScreen.classList.add('hidden');
+                setTimeout(() => {
+                    introScreen.style.display = 'none';
+                    mainCard.classList.add('visible');
+                    launchConfetti();
+                }, 450);
+            }
+        });
+
+        // كلام الزرار السفلي
+        const funNotes = [
+            "نفسي اكل باشميل تبقي عامله انتي 😫😂",
+            "أحلى ميمو في الدنيا كلها وكل سنة وانتي منورة حياتنا 💖",
+            "ربنا يستر من مصايب السنة الجديدة اللي هنعملها سوا 😂🔥",
+            "أجدع أخت وصاحبة في المجرة ومليش غيرك بجد ♥️✨",
+            "عقبال 100 سنة وانتي ناجحة ومحققة كل اللي نفسك فيه 🎂🎉",
+            "متنسيش تردي على الرسالة عشان تعبت في الحوار ده 😎✨"
+        ];
+
+        let noteIndex = 0;
+        const celebrateBtn = document.getElementById('celebrateBtn');
+        const funNoteDisplay = document.getElementById('funNoteDisplay');
+
+        celebrateBtn.addEventListener('click', () => {
+            if (!isPlaying) startBirthdayMelody();
+            funNoteDisplay.style.display = 'flex';
+            funNoteDisplay.textContent = funNotes[noteIndex];
+            noteIndex = (noteIndex + 1) % funNotes.length;
+            launchConfetti();
+        });
+
+        function launchConfetti() {
+            const symbols = ['💖', '🎂', '✨', '🖤', '🌸', '🎉'];
+            for (let i = 0; i < 26; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti';
+                conf.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.fontSize = (Math.random() * 14 + 14) + 'px';
+                conf.style.animationDuration = (Math.random() * 2 + 2.2) + 's';
+                document.body.appendChild(conf);
+                setTimeout(() => conf.remove(), 4500);
+            }
+        }
+    </script>
+</body>
+</html>
+فاعلية -->
     <div id="intro-screen">
         <div class="gift-box">🎁</div>
         <h2 class="intro-title">في مفاجأة مخصوصة ليكي يا ميمو ✨</h2>
