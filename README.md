@@ -1,2 +1,2 @@
-# happy-birthday-mimo.
-عيد ميلاد اميمه
+# happy-birthday-mimo.happyB
+irthday-mimo
